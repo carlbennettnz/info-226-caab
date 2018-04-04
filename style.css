@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eee;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.login {
+  margin: 50px auto;
+  width: 300px;
+  background-color: white;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, .05);
+  padding: 30px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.login label {
+  text-transform: uppercase;
+  color: #999;
+  font-weight: bold;
+  text-align: left;
+  display: block;
+  font-size: 12px;
+}
+
+.login input[type=text],
+.login input[type=password] {
+  width: 100%;
+  margin-bottom: 20px;
+  border-width: 0 0 1px 0;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+  padding: 0.5em 0;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
+  outline: none;
+  box-shadow: 0 1px 0 #09f;
+  border-color: #09f;
+}
+
+button,
+input[type=submit] {
+  background-color: #09f;
+  color: white;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  font-size: inherit;
+  border: none;
+}
