@@ -72,3 +72,57 @@ input[type=submit] {
   font-size: inherit;
   border: none;
 }
+
+.tt {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tt th,
+.tt td {
+  border: 1px solid #ccc;
+  padding: 0.6em 0.6em;
+  font-size: 12px;
+  width: 90px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.tt th {
+  background-color: #f2f2f2;
+}
+
+.tt td:first-child {
+  text-align: right;
+  font-weight: bold;
+  color: #999;
+  background-color: #fbfbfb;
+}
+
+.dashboard {
+  display: flex;
+  padding: 20px;
+}
+
+.dashboard-module {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: block;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.dashboard-module:last-child {
+  margin-right: 0;
+}
+
+.dashboard-module-title {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+  margin: 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}

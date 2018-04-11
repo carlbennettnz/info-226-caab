@@ -5,7 +5,7 @@ angular
     controller($scope, $location) {
       $scope.action = ($event) => {
         $event.preventDefault()
-        $location.path('/courses')
+        $location.path('/dashboard')
       }
     }
   })

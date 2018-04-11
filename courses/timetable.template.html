@@ -1,0 +1,25 @@
+<h2 class="dashboard-module-title">
+  My Lecture Timetable
+</h2>
+
+<table class="tt">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="slot in timeslots">
+      <td ng-bind="slot.time"></td>
+      <td ng-repeat="course in slot.days">
+        <span class="tt-course-code">{{course.code}}</span>
+      </td>
+    </tr>
+  </tbody>
+</table>

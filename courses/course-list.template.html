@@ -1,14 +1,12 @@
-<header class="page-header">
-    <h1>Whiteboard</h1>
-</header>
+<h2 class="dashboard-module-title">
+  My Course List
+</h2>
 
-<h1>Courses</h1>
-
-<ul>
-  <li ng-repeat="course in courses">
-    <strong>{{course.code}}:</strong>
-    {{course.title}}
-  </li>
-</ul>
-
-<button>Log out</button>
+<div class="course-list">
+  <ul>
+    <li ng-repeat="course in courses">
+      <strong>{{course.code}}:</strong>
+      {{course.title}}
+    </li>
+  </ul>
+</div>

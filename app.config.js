@@ -3,6 +3,6 @@ const application = angular
   .config(function($routeProvider) {
     $routeProvider
       .when('/login', { template: '<login></login>' })
-      .when('/courses', { template: '<course-list></course-list>' })
+      .when('/dashboard', { template: '<dashboard></dashboard>' })
       .otherwise('/login')
   })
