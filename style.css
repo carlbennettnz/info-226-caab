@@ -10,9 +10,9 @@ body {
 }
 
 .page-header {
-  background-color: rgb(30,153,28);
+  background-color: #004730;
   color: white;
-  padding: 10px 20px;
+  padding: 15px 20px;
 }
 
 .page-header h1 {
