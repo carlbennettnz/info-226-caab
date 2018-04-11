@@ -1,9 +1,14 @@
 <header class="page-header">
     <h1>Whiteboard</h1>
 </header>
+
 <h1>Courses</h1>
+
 <ul>
-    <li ng-repeat="course in courses">
-    <strong>{{course.code}}: </strong>{{course.title}}</li>
-    </ul>
+  <li ng-repeat="course in courses">
+    <strong>{{course.code}}:</strong>
+    {{course.title}}
+  </li>
+</ul>
+
 <button>Log out</button>
