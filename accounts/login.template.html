@@ -1,9 +1,15 @@
 <form class="login" ng-submit="action($event)">
   <label for="login-username">Username</label>
-  <input type="text" id="login-username" name="username" />
+  <input type="text" id="login-username" name="username" ng-model="username" />
 
   <label for="login-password">Password</label>
-  <input type="password" id="login-password" name="password" />
+  <input type="password" id="login-password" name="password" ng-model="password" />
+
+  <div class="errors" ng-if="errors.length">
+    <div class="error" ng-repeat="error in errors">
+      {{error}}
+    </div>
+  </div>
 
   <input type="submit" value="Login">
 </form>
