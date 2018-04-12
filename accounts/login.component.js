@@ -2,7 +2,7 @@ angular
   .module('accounts')
   .component('login', {
     templateUrl: 'accounts/login.template.html',
-    controller($scope, $location, $http) {
+    controller($scope, $location, $http, session) {
       $scope.errors = []
 
       const userListPromise = $http({
@@ -32,7 +32,13 @@ angular
             return
           }
 
-          $location.path('/dashboard')
+          session.setUser(user)
+
+          if (user.UserType === 'lecturer') {
+            $location.path('/lecturer-dashboard')
+          } else {
+            $location.path('/dashboard')            
+          }
         })
       }
     }
