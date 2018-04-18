@@ -3,14 +3,16 @@
 }
 
 body {
-  background-color: #eee;
+  background-color: #004730;
   font-size: 14px;
   font-family: sans-serif;
   margin: 0;
 }
 
 .page-header {
-  background-color: #004730;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid black;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
   color: white;
   padding: 15px 20px;
   display: flex;
@@ -115,9 +117,9 @@ input[type=password]:focus {
   max-width: 600px;
 }
 
-.dashboard-module:last-child {
+/* .dashboard-module:last-child {
   margin-right: 0;
-}
+} */
 
 .dashboard-module-title {
   font-size: 16px;
@@ -193,4 +195,138 @@ account-menu .account-dropdown a:hover {
 
 .course-manage-list button {
 
+}
+
+.dashboard {
+  flex-wrap: wrap;
+  padding-top: 60px;
+  margin-left: 400px;
+  /* padding: 0; */
+}
+
+.dashboard-module {
+  min-width: 400px;
+  margin-bottom: 20px;
+  /* background-color: #29d; */
+  /* margin: 0; */
+  /* padding: 40px; */
+}
+
+.dashboard-module:nth-child(2) {
+  /* background-color: #5b5; */
+  /* background-color: #3ae; */
+}
+
+.dashboard-module:nth-child(3) {
+  /* background-color: #c33; */
+  /* background-color: #3ae;   */
+}
+
+.dashboard-module:nth-child(4) {
+  /* background-color: #29d; */
+}
+
+.dashboard-module h2 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: normal;
+  padding-bottom: 0.5em;
+  /* box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); */
+  margin: -20px -20px 0 -20px;
+  padding: 15px 20px 10px 20px;
+  background-color: rgba(0, 0, 0, 0.02);
+  color: #555;
+  border-bottom: 1px solid #ccc;
+}
+
+.stat {
+  float: left;
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  margin-top: 5px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.stat:last-child {
+  margin-right: 0;
+}
+
+.stats {
+  display: flex;
+  padding-top: 10px;
+}
+
+.stat .number {
+  font-size: 60px;
+  color: #555;
+  font-family: 'Proxima Nova';
+  font-weight: 100;
+}
+
+.stat .label {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #555;
+  width: 60px;
+  font-size: 12px;
+  padding-bottom: 12px;
+  padding-left: 8px;
+}
+
+.due {
+  color: #555;
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 1em 1.2em;
+  border-top: 1px solid #ccc;
+  margin: 10px -20px -20px;
+}
+
+.page {
+  display: flex;
+  background-attachment: fixed;
+  background-image:
+    linear-gradient(130deg, rgba(255, 255, 255, 0.02) 250px, transparent 250px),
+    linear-gradient(130deg, rgba(255, 255, 255, 0.03) 330px, transparent 330px);
+}
+
+.side {
+  padding: 100px;
+  position: fixed;
+  width: 400px;
+  height: 100vh;
+  top: 0;
+}
+
+.side h1 {
+  color: white;
+  line-height: 1;
+  font-size: 45px;
+  font-family: 'Proxima Nova';
+  font-weight: 300;
+  text-align: center;
+}
+
+.side nav {
+  position: absolute;
+  bottom: 50px;
+  width: 200px;
+}
+
+.side ul {
+  padding: 0;
+  margin: 80px 0 0;
+}
+
+.side li {
+  list-style: none;
+  text-align: center;
+  color: #fffd;
+  font-size: 18px;
+  font-family: 'Proxima Nova';
+  padding: 0.8em;
+  margin: 0 0 10px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
