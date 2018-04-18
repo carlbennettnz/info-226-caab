@@ -17,6 +17,7 @@
 
     <!-- Dashboard -->
     <script src="dashboard.component.js"></script>
+    <script src="lecturer-dashboard.component.js"></script>
 
     <!-- Accounts -->
     <script src="accounts/accounts.module.js"></script>
@@ -26,6 +27,7 @@
     <!-- Courses -->
     <script src="courses/courses.module.js"></script>
     <script src="courses/course-list.component.js"></script>
+    <script src="courses/manage-courses.component.js"></script>
     <script src="courses/timetable.component.js"></script>
   </head>
   
@@ -33,3 +35,9 @@
     <div ng-view></div>
   </body>
 </html>
+
+
+  <label ng-repeat="course in courses">
+    <input type="checkbox" name="{{course.code}}">
+    {{course.code}}: {{course.title}}
+  </label>

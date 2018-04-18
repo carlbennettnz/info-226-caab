@@ -1,0 +1,19 @@
+<h2 class="dashboard-module-title">
+  Courses
+</h2>
+
+<div class="course-manage-list">
+  <ul>
+    <li ng-repeat="course in courses">
+      <div class="course">
+        <strong>{{course.code}}:</strong>
+        {{course.title}}
+      </div>
+
+      <div class="actions">
+        <button>Edit</button>
+        <button ng-click="deleteCourse(course.ID)">X</button>
+      </div>
+    </li>
+  </ul>
+</div>

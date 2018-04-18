@@ -4,7 +4,7 @@
 
 body {
   background-color: #eee;
-  font-size: 16px;
+  font-size: 14px;
   font-family: sans-serif;
   margin: 0;
 }
@@ -63,8 +63,8 @@ input[type=password]:focus {
   border-color: #09f;
 }
 
-button,
-input[type=submit] {
+.login button,
+.login input[type=submit] {
   background-color: #09f;
   color: white;
   font-weight: bold;
@@ -112,6 +112,7 @@ input[type=submit] {
   display: block;
   flex: 1;
   margin-right: 20px;
+  max-width: 600px;
 }
 
 .dashboard-module:last-child {
@@ -173,4 +174,23 @@ account-menu .account-dropdown a:hover {
   background: #c44;
   padding: 0.4em 0.6em;
   margin-bottom: 2px;
+}
+
+.course-manage-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.course-manage-list li {
+  display: block;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35px;
+}
+
+.course-manage-list button {
+
 }
