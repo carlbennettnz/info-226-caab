@@ -2,8 +2,17 @@ const application = angular
   .module('app')
   .config(function($routeProvider) {
     $routeProvider
-      .when('/login', { template: '<login></login>' })
-      .when('/dashboard', { template: '<dashboard></dashboard>' })
-      .when('/lecturer-dashboard', { template: '<lecturer-dashboard></lecturer-dashboard>' })
+      .when('/login', {
+        templateUrl: 'accounts/login.template.html',
+        controller: 'login'
+      })
+      .when('/students/dashboard', {
+        templateUrl: 'student-dashboard.template.html',
+        controller: 'studentDashboard'
+      })
+      .when('/lecturers/dashboard', {
+        templateUrl: 'lecturer-dashboard.template.html',
+        controller: 'lecturerDashboard'
+      })
       .otherwise('/login')
   })
