@@ -11,4 +11,35 @@
   </li>
 </ul>
 
+<button class="expandable">Add Courses</button>
+
+<div class="content">  
+    <h4>Courses Availble:</h4>
+    <form>
+        <fieldset>
+         <legend>Select Course(s)</legend>
+             <label ng-repeat="course in courses">
+                <input type="checkbox" name="{{course.code}}">
+                 {{course.code}}: {{course.title}}<br>
+             </label>
+                <button class="update">Add</button>
+        </fieldset>
+    </form>
+</div>
+
+<button class="expandable">Remove Courses</button>
+
+<div class="content">
+    <form>
+        <fieldset>
+         <legend>Select Course(s)</legend>
+             <label ng-repeat="course in courses">
+                <input type="checkbox" name="{{course.code}}">
+                 {{course.code}}: {{course.title}}<br>
+             </label>
+                <button class="update">Remove</button>
+            </fieldset>
+    </form>
+</div>
+
 <button>Log out</button>
