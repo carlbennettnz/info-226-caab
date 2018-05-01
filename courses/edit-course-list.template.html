@@ -1,0 +1,30 @@
+<header class="page-header">
+  <h1>Whiteboard</h1>
+  <account-menu></account-menu>
+</header>
+
+<div class="page">
+  <div class="side">
+    <h1>Edit Course List</h1>
+  </div>
+
+  <div class="cards">
+    <div class="card wide">
+      <h2>My Selected Courses</h2>
+
+      <form class="horizontal">
+        <ul class="course-list">
+          <li ng-repeat="course in courses">
+            <input type="checkbox" ng-model="course.taking" />
+            <strong>{{course.code}}:</strong>
+            {{course.title}}
+          </li>
+        </ul>
+
+        <div class="actions">
+          <input type="submit" value="Save" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

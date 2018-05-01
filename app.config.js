@@ -12,9 +12,21 @@ function configureApp($routeProvider) {
       templateUrl: 'student-dashboard.template.html',
       controller: 'studentDashboard'
     })
+    .when('/students/edit-course-list', {
+      templateUrl: 'courses/edit-course-list.template.html',
+      controller: 'editCourseList'
+    })
     .when('/lecturers/dashboard', {
       templateUrl: 'lecturer-dashboard.template.html',
       controller: 'lecturerDashboard'
+    })
+    .when('/lecturers/courses/new', {
+      templateUrl: 'courses/new-course.template.html',
+      controller: 'newCourse'
+    })
+    .when('/lecturers/courses/:course', {
+      templateUrl: 'courses/manage-course.template.html',
+      controller: 'manageCourse'
     })
     .otherwise('/login')
 }

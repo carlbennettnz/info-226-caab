@@ -5,98 +5,22 @@
 
 <div class="page">
   <div class="side">
-    <h1>Course Overview</h1>
+    <h1>Courses Overview</h1>
 
     <nav>
       <ul>
-        <li>Add Course</li>
-        <li>Something Else</li>
-        <li>One More</li>
+        <li><a ng-href="#!/lecturers/courses/new">Add Course</a></li>
+        <li><a>Something Else</a></li>
+        <li><a>One More</a></li>
       </ul>
     </nav>
   </div>
 
-  <div class="dashboard">
-    <!-- <manage-courses class="dashboard-module"></manage-courses> -->
-
-    <div class="dashboard-module">
-      <h2><strong>COUR123:</strong> C# Programming</h2>
-      
-      <div class="stats">
-        <div class="stat">
-          <span class="number">3</span>
-          <span class="label">Pending Submissions</span>
-        </div>
-        
-        <div class="stat">
-          <span class="number">5</span>
-          <span class="label">Unanswered Questions</span>
-        </div>
-      </div>
-      
-      <div class="due">
-        <strong>Next Assignment Due:</strong> 15 April 2018
-      </div>
-    </div>
-
-    <div class="dashboard-module">
-      <h2><strong>COUR123:</strong> C# Programming</h2>
-      
-      <div class="stats">
-        <div class="stat">
-          <span class="number">3</span>
-          <span class="label">Pending Submissions</span>
-        </div>
-        
-        <div class="stat">
-          <span class="number">5</span>
-          <span class="label">Unanswered Questions</span>
-        </div>
-      </div>
-      
-      <div class="due">
-        <strong>Next Assignment Due:</strong> 15 April 2018
-      </div>
-    </div>
-
-    <div class="dashboard-module">
-      <h2><strong>COUR123:</strong> C# Programming</h2>
-      
-      <div class="stats">
-        <div class="stat">
-          <span class="number">3</span>
-          <span class="label">Pending Submissions</span>
-        </div>
-        
-        <div class="stat">
-          <span class="number">5</span>
-          <span class="label">Unanswered Questions</span>
-        </div>
-      </div>
-      
-      <div class="due">
-        <strong>Next Assignment Due:</strong> 15 April 2018
-      </div>
-    </div>
-
-    <div class="dashboard-module">
-      <h2><strong>COUR123:</strong> C# Programming</h2>
-      
-      <div class="stats">
-        <div class="stat">
-          <span class="number">3</span>
-          <span class="label">Pending Submissions</span>
-        </div>
-        
-        <div class="stat">
-          <span class="number">5</span>
-          <span class="label">Unanswered Questions</span>
-        </div>
-      </div>
-      
-      <div class="due">
-        <strong>Next Assignment Due:</strong> 15 April 2018
-      </div>
-    </div>
+  <div class="cards">
+    <lecturer-course-card
+      ng-repeat="course in courses"
+      course="course"
+      class="card clickable"
+    ></lecturer-course-card>
   </div>
 </div>

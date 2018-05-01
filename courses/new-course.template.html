@@ -1,0 +1,52 @@
+<header class="page-header">
+  <h1>Whiteboard</h1>
+  <account-menu></account-menu>
+</header>
+
+<div class="page">
+  <div class="side">
+    <h1>New Course</h1>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h2>Course Details</h2>
+
+      <form class="horizontal">
+        <label class="row">
+          <span class="label-text">Code</span>
+          <input type="text" ng-model="course.code">
+        </label>
+
+        <label class="row">
+          <span class="label-text">Title</span>
+          <input type="text" ng-model="course.title">
+        </label>
+        
+        <label class="row">
+          <span class="label-text">Overview</span>
+          <input type="text" ng-model="course.overview">
+        </label>
+        
+        <label class="row">
+          <span class="label-text">Year</span>
+          <input type="text" ng-model="course.year">
+        </label>
+        
+        <label class="row">
+          <span class="label-text">Trimester</span>
+          <input type="text" ng-model="course.trimester">
+        </label>
+        
+        <label class="row">
+          <span class="label-text">Lecture Times</span>
+          <input type="text" ng-model="course.lectureTimes">
+        </label>
+
+        <div class="actions">
+          <input type="submit" value="Add Course" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
