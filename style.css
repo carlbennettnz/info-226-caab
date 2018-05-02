@@ -159,6 +159,7 @@ account-menu .account-dropdown {
 
 account-menu .account-dropdown li {
   padding: 0;
+  border-bottom: 1px solid #ddd;
 }
 
 account-menu .account-dropdown a {
@@ -166,12 +167,40 @@ account-menu .account-dropdown a {
   text-decoration: none;
   padding: 0.6em;
   display: block;
-  border-bottom: 1px solid #ddd;
 }
 
 account-menu .account-dropdown a:hover {
   background-color: #07c;
   color: white;
+}
+
+account-menu .account-dropdown .colours {
+  display: flex;
+  padding: 0.6em;
+  color: #333;
+  cursor: default;
+}
+
+account-menu .account-dropdown .colours span {
+  margin-right: auto;
+}
+
+account-menu .account-dropdown .colour {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background-color: #004730;
+  margin: 2px 0 2px 8px;
+  cursor: pointer;
+}
+
+account-menu .account-dropdown .colour[class*='#004730'] { background-color: #004730; }
+account-menu .account-dropdown .colour[class*='#de8511'] { background-color: #de8511; }
+account-menu .account-dropdown .colour[class*='#1e3d91'] { background-color: #1e3d91; }
+account-menu .account-dropdown .colour[class*='#ff00ff'] { background-color: #ff00ff; }
+
+account-menu .account-dropdown .colour.selected {
+  transform: scale(1.2);
 }
 
 .login .errors {

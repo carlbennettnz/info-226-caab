@@ -15,7 +15,7 @@ function editCourseListController($scope, $http, $timeout, session) {
     method: 'GET',
     url: 'https://caab.sim.vuw.ac.nz/api/bennetcarl2/course_association_directory.json'
   })
-  
+
   Promise.all([ getCourses, getCourseAssociations ]).then(([ coursesResp, courseAssociationsResp ]) => {
     if (!coursesResp.data.courses || !courseAssociationsResp.data.courseAssociations) {
       console.error('failed to load courses or course associations')
@@ -26,15 +26,14 @@ function editCourseListController($scope, $http, $timeout, session) {
     const courses = coursesResp.data.courses
     const takingIds = courseAssociationsResp.data.courseAssociations
       .filter(assoc => assoc.StudentID === student.ID)
-      .map(assoc => CourseID)
+      .map(assoc => assoc.CourseID)
 
     $timeout(() => {
-      $scope.courses = courses.map((course, i) => ({
+      $scope.courses = courses.map(course => ({
         code: course.ID,
         title: course.Name,
-        taking: takingIds.includes(course.ID) || i === 0
+        taking: takingIds.includes(course.ID)
       }))
-      console.log($scope.courses)
     }, 0)
   })
 }

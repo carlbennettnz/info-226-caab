@@ -3,6 +3,13 @@
 </div>
 
 <ul class="account-dropdown" ng-if="showMenu">
+  <li class="colours">
+    <span>Theme</span>
+    <div
+      ng-repeat="colour in colours"
+      ng-click="selectColour(colour)"
+      ng-class="getColourClass(colour)"></div>
+  </li>
   <li><a href="#!/accounts/change-password">Change Password</a></li>
   <li><a href="#!/login">Log out</a></li>
 </ul>
