@@ -1,1 +1,1 @@
-angular.module('courses', [])
+angular.module('courses', [ 'accounts' ])
