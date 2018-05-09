@@ -10,11 +10,6 @@ function loginController($scope, $location, $http, session) {
     url: `https://caab.sim.vuw.ac.nz/api/bennetcarl/user_list.json`
   })
 
-  userListPromise.then(response => {
-    console.log(response.data.users)
-    return response
-  })
-
   $scope.doLogin = ($event) => {
     $event.preventDefault()
 
