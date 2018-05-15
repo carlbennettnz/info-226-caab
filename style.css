@@ -426,6 +426,10 @@ form.horizontal .actions {
   justify-content: flex-end;
 }
 
+form.horizontal .actions input + input {
+  margin-left: 0.5em;
+}
+
 form.horizontal input[type=submit] {
   background-color: #004730;
   font-size: 14px;
@@ -488,4 +492,97 @@ fieldset {
  
 .action, .update:hover {
   background-color: dimgray;
+}
+
+table.assignments {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.assignments td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+table.assignments tr:first-child td { border-top: none; }
+table.assignments tr:last-child td { border-bottom: none; }
+
+.qa .thread {
+  padding-left: 60px;
+  position: relative;
+}
+
+.qa .thread:not(:last-child) {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.qa .thread::before {
+  content: 'Q';
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #999;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.qa .question-asker {
+  color: #999;
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.qa .answer {
+  background-color: #e4e4e4;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.qa .answer::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 10px;
+  border: 7px solid transparent;
+  border-bottom-color: #e4e4e4;
+}
+
+.qa .answer input {
+  width: 300px;
+  padding: 5px;
+  margin: -5px;
+  border: none;
+  font: inherit;
+}
+
+table.submissions {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.submissions td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+table.submissions tr:first-child td { border-top: none; }
+table.submissions tr:last-child td { border-bottom: none; }
+
+table.submissions input {
+  padding: 5px;
+  width: 50px;
+  font: inherit;
+  margin-left: -8px;
 }

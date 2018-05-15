@@ -1,7 +1,7 @@
 angular
   .module('courses')
-  .controller('manageCourse', manageCourseController)
+  .controller('newCourse', newCourseController)
 
-function manageCourseController($scope) {
+function newCourseController($scope) {
   $scope.course = {}
 }

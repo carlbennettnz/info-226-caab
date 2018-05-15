@@ -1,0 +1,72 @@
+<header class="page-header">
+  <h1>Whiteboard</h1>
+  <account-menu></account-menu>
+</header>
+
+<div class="page">
+  <div class="side">
+    <h1>Manage Assignment</h1>
+  </div>
+
+  <div class="cards">
+    <div class="card wide">
+      <h2>Assignment Details</h2>
+      
+      <form class="horizontal">
+        <label class="row">
+          <span class="label-text">Name</span>
+          <input type="text" ng-model="assignment.name">
+        </label>
+        
+        <label class="row">
+          <span class="label-text">Overview</span>
+          <input type="text" ng-model="assignment.overview">
+        </label>
+        
+        <label class="row">
+          <span class="label-text">Due Date</span>
+          <input type="text" ng-model="assignment.dueDate">
+        </label>
+
+        <div class="actions">
+          <input type="submit" value="Delete" class="delete-btn" />
+          <input type="submit" value="Save Assignment Details" />
+        </div>
+      </form>
+    </div>
+    
+    <div class="card wide">
+      <h2>Student Questions</h2>
+
+      <span ng-if="!questions">No questions yet.</span>
+      
+      <div class="qa">
+        <div class="thread" ng-repeat="question in questions">
+          <div class="question-asker">{{question.asker}}</div>
+          <div class="question">{{question.question}}</div>
+          <div class="answer">
+            <span ng-if="question.answer">{{question.answer}}</span>
+            <input ng-if="!question.answer" ng-model="question.draftAnswer" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card wide">
+      <h2>Submissions</h2>
+
+      <span ng-if="!submissions">No submissions yet.</span>
+      
+      <table class="submissions">
+        <tr ng-repeat="submission in submissions">
+          <td>{{submission.studentName}}</td>
+          <td>{{submission.submissionDate | date:'dd/MM/yyyy'}}</td>
+          <td>
+            <span ng-if="submission.grade">{{submission.grade}}</span>
+            <input ng-if="!submission.grade" ng-model="submission.draftGrade" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

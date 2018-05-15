@@ -6,12 +6,22 @@
 <div class="page">
   <div class="side">
     <h1>Manage Course</h1>
+
+    <nav>
+      <ul>
+        <li><a ng-href="#!/lecturers/courses/{{course.code}}/assignments/new">Add Assignment</a></li>
+      </ul>
+    </nav>
   </div>
 
   <div class="cards">
+    <assignment-list
+      course="course"
+      class="card">
+    </assignment-list>
+    
     <div class="card">
       <h2>Course Details</h2>
-
       <form class="horizontal">
         <label class="row">
           <span class="label-text">Title</span>

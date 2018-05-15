@@ -28,5 +28,13 @@ function configureApp($routeProvider) {
       templateUrl: 'courses/manage-course.template.html',
       controller: 'manageCourse'
     })
+    .when('/lecturers/courses/:course/assignments/new', {
+      templateUrl: 'assignments/new-assignment.template.html',
+      controller: 'newAssignment'
+    })
+    .when('/lecturers/courses/:course/assignments/:assignment', {
+      templateUrl: 'assignments/manage-assignment.template.html',
+      controller: 'manageAssignment'
+    })
     .otherwise('/login')
 }
