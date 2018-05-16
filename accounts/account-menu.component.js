@@ -9,7 +9,6 @@ function accountMenuComponent($scope, session) {
   $scope.showMenu = false
   $scope.toggleMenu = () => $scope.showMenu = !$scope.showMenu
   $scope.user = session.getUser()
-  console.log($scope.user)
   $scope.getColourClass = (colour) => `colour ${colour} ${$scope.theme === colour ? 'selected' : ''}`
   $scope.selectColour = (colour) => {
     localStorage.colour = colour

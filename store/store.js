@@ -6,6 +6,8 @@ class Store {
     this.location = 'https://caab.sim.vuw.ac.nz/api'
     this.namespace = localStorage.store || 'carlandtarryn'
 
+    this._lock = $q.resolve()
+
     this._lock = this._checkCustomSchemaInPlace().then(inPlace => {
       if (!inPlace && confirm('Initialise custom schema?')) {
         this._loadAll().then(this._storeCustomSchema.bind(this))
@@ -87,7 +89,7 @@ class Store {
     }
 
     const url = `${this.namespacedLocation}/update.assignment_directory.json`
-    const body = {
+    const data = {
       ID: '__CUSTOM_SCHEMA__',
       Name: '1'
     }

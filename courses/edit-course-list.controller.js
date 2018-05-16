@@ -9,7 +9,7 @@ function editCourseListController($scope, $q, store, session) {
   const student = session.getUser()
 
   const getCourses = store.get('courses')
-  const getCoursesTaken = store.get('courseMembers', assoc => assoc.studentId === student.id)
+  const getCoursesTaken = store.get('courseAssociations', assoc => assoc.studentId === student.id)
     .then(assocs => assocs.map(assoc => assoc.courseId))
 
   $q.all([ getCourses, getCoursesTaken ]).then(([ courses, courseIdsTaken ]) => {

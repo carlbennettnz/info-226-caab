@@ -43,8 +43,8 @@ Store.endpoints = {
     name: 'courseAssociations',
     deserialise(response) {
       return response.courseAssociations.map(record => ({
-        studentId: record.StudentId,
-        courseId: record.courseId
+        studentId: record.StudentID,
+        courseId: record.CourseID
       }))
     }
   }
