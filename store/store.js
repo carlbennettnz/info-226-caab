@@ -30,7 +30,9 @@ class Store {
   save(model, updated) {
     return this._lock
       .then(() => this._lock = this._getAll(model))
-      .then(records => records.map((record, i) => record.id === updated.id ? updated : record))
+      .then(records => records.map(r => r.id).includes(updated.id)
+        ? records.map((record, i) => record.id === updated.id ? updated : record)
+        : [ ...records, updated ])
       .then(records => this._save(model, records))
   }
 
@@ -118,6 +120,7 @@ class Store {
   }
 
   async _save(model, records) {
+    const method = 'POST'
     const url = `${this.namespacedLocation}/update.assignment_directory.json`
     const data = {
       ID: model,
