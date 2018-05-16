@@ -25,7 +25,7 @@
         
         <label class="row">
           <span class="label-text">Due Date</span>
-          <input type="text" ng-model="assignment.dueDate | date:'dd/MM/yyyy'">
+          <input type="text" ng-bind="assignment.dueDate | date:'dd/MM/yyyy'">
         </label>
       </form>
     </div>
