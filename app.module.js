@@ -1,5 +1,7 @@
 angular.module('app', [
   'ngRoute',
   'accounts',
-  'courses'
+  'courses',
+  'assignments',
+  'store'
 ])

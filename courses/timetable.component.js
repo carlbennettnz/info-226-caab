@@ -2,30 +2,32 @@ angular
   .module('courses')
   .component('timetable', {
     templateUrl: 'courses/timetable.template.html',
-    controller($scope) {
-      $scope.timeslots = getBlankTimetable()
-
-      $scope.timeslots[3].days[1] = {
-        ...$scope.timeslots[3].days[1],
-        code: 'INFO226'
-      }
-
-      $scope.timeslots[3].days[3] = {
-        ...$scope.timeslots[3].days[3],
-        code: 'INFO226'
-      }
-
-      $scope.timeslots[6].days[1] = {
-        ...$scope.timeslots[3].days[1],
-        code: 'INFO226'
-      }
-
-      $scope.timeslots[6].days[3] = {
-        ...$scope.timeslots[3].days[3],
-        code: 'INFO226'
-      }
-    }
+    controller: timetableComponent
   })
+
+function timetableComponent($scope, store) {
+  $scope.timeslots = getBlankTimetable()
+
+  $scope.timeslots[3].days[1] = {
+    ...$scope.timeslots[3].days[1],
+    code: 'INFO226'
+  }
+
+  $scope.timeslots[3].days[3] = {
+    ...$scope.timeslots[3].days[3],
+    code: 'INFO226'
+  }
+
+  $scope.timeslots[6].days[1] = {
+    ...$scope.timeslots[3].days[1],
+    code: 'INFO226'
+  }
+
+  $scope.timeslots[6].days[3] = {
+    ...$scope.timeslots[3].days[3],
+    code: 'INFO226'
+  }
+}
 
 function getBlankTimetable() {
   const timetable = []

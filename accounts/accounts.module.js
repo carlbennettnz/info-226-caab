@@ -1,5 +1,5 @@
 angular
-  .module('accounts', [])
+  .module('accounts', [ 'store' ])
   .config(function($provide) {
     $provide.factory('session', function() {
       let user = localStorage.caabUser && JSON.parse(localStorage.caabUser)

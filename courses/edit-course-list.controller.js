@@ -2,38 +2,20 @@ angular
   .module('courses')
   .controller('editCourseList', editCourseListController)
 
-function editCourseListController($scope, $http, $timeout, session) {
+function editCourseListController($scope, $q, store, session) {
   $scope.courses = []
   $scope.currentCourses = []
+  
+  const student = session.getUser()
 
-  const getCourses = $http({
-    method: 'GET',
-    url: 'https://caab.sim.vuw.ac.nz/api/bennetcarl2/course_directory.json'
-  })
+  const getCourses = store.get('courses')
+  const getCoursesTaken = store.get('courseMembers', assoc => assoc.studentId === student.id)
+    .then(assocs => assocs.map(assoc => assoc.courseId))
 
-  const getCourseAssociations = $http({
-    method: 'GET',
-    url: 'https://caab.sim.vuw.ac.nz/api/bennetcarl2/course_association_directory.json'
-  })
-
-  Promise.all([ getCourses, getCourseAssociations ]).then(([ coursesResp, courseAssociationsResp ]) => {
-    if (!coursesResp.data.courses || !courseAssociationsResp.data.courseAssociations) {
-      console.error('failed to load courses or course associations')
-      return
-    }
-
-    const student = session.getUser()
-    const courses = coursesResp.data.courses
-    const takingIds = courseAssociationsResp.data.courseAssociations
-      .filter(assoc => assoc.StudentID === student.ID)
-      .map(assoc => assoc.CourseID)
-
-    $timeout(() => {
-      $scope.courses = courses.map(course => ({
-        code: course.ID,
-        title: course.Name,
-        taking: takingIds.includes(course.ID)
-      }))
-    }, 0)
+  $q.all([ getCourses, getCoursesTaken ]).then(([ courses, courseIdsTaken ]) => {
+    $scope.courses = courses.map(course => ({
+      ...course,
+      taking: courseIdsTaken.includes(course.id)
+    }))
   })
 }

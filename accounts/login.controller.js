@@ -2,13 +2,10 @@ angular
   .module('accounts')
   .controller('login', loginController)
 
-function loginController($scope, $location, $http, session) {
+function loginController($scope, $location, $timeout, session, store) {
   $scope.errors = []
 
-  const userListPromise = $http({
-    method: 'GET',
-    url: `https://caab.sim.vuw.ac.nz/api/bennetcarl/user_list.json`
-  })
+  const userListPromise = store.get('users')
 
   $scope.doLogin = ($event) => {
     $event.preventDefault()
@@ -18,22 +15,20 @@ function loginController($scope, $location, $http, session) {
     if (!$scope.password) $scope.errors.push('You must provide a password')
     if ($scope.errors.length) return
 
-    userListPromise.then(response => {
-      const users = response.data.users
-
+    userListPromise.then(users => {
       const user = users.find(
-        user => user.LoginName === $scope.username
-          && user.Password === $scope.password
+        user => user.loginName === $scope.username
+        && user.password === $scope.password
       )
 
       if (!user) {
         $scope.errors.push('Login details are incorrect')
         return
       }
-
+      
       session.setUser(user)
 
-      if (user.UserType === 'lecturer') {
+      if (user.userType === 'lecturer') {
         $location.path('/lecturers/dashboard')
       } else {
         $location.path('/students/dashboard')

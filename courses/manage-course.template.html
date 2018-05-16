@@ -9,23 +9,18 @@
 
     <nav>
       <ul>
-        <li><a ng-href="#!/lecturers/courses/{{course.code}}/assignments/new">Add Assignment</a></li>
+        <li><a ng-href="#!/lecturers/courses/{{course.id}}/assignments/new">Add Assignment</a></li>
       </ul>
     </nav>
   </div>
 
   <div class="cards">
-    <assignment-list
-      course="course"
-      class="card">
-    </assignment-list>
-    
-    <div class="card">
+    <div class="card wide">
       <h2>Course Details</h2>
       <form class="horizontal">
         <label class="row">
-          <span class="label-text">Title</span>
-          <input type="text" ng-model="course.title">
+          <span class="label-text">Name</span>
+          <input type="text" ng-model="course.name">
         </label>
         
         <label class="row">
@@ -49,19 +44,12 @@
         </label>
 
         <div class="actions">
+          <input type="submit" value="Delete" class="delete-btn" />
           <input type="submit" value="Save Course Details" />
         </div>
       </form>
     </div>
-
-    <div class="card">
-      <h2>Danger Zone</h2>
-
-      <form class="horizontal">
-        <div class="actions">
-          <input type="submit" value="Delete Course" class="delete-btn" />
-        </div>
-      </form>
-    </div>
+    
+    <assignment-list course="course" class="card"></assignment-list>
   </div>
 </div>

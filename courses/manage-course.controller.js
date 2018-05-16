@@ -1,24 +1,8 @@
 angular
   .module('courses')
-  .controller('manageCourse', function ($scope, $routeParams, $http) {
-    $scope.course = {
-      code: $routeParams.course
-    }
+  .controller('manageCourse', manageCourseController)
 
-    $http({
-      method: 'GET',
-      url: 'https://caab.sim.vuw.ac.nz/api/bennetcarl2/course_directory.json'
-    }).then(response => {
-      const course = response.data.courses.find(c => c.ID === $scope.course.code)
-
-      $scope.course = {
-        code: course.ID,
-        title: course.Name,
-        overview: course.Overview,
-        year: course.Year,
-        trimester: course.Trimester,
-        lectureTimes: course.LectureTimes,
-        lecturerId: course.LecturerID
-      }
-    })
-  })
+function manageCourseController($scope, $routeParams, store) {
+  $scope.course = { id: $routeParams.course }
+  store.get('courses', $routeParams.course).then(course => $scope.course = course)
+}
