@@ -16,6 +16,14 @@ function configureApp($routeProvider) {
       templateUrl: 'courses/edit-course-list.template.html',
       controller: 'editCourseList'
     })
+    .when('/students/assignments', {
+      templateUrl: 'courses/assignments.template.html',
+      controller: 'assignments'
+    })
+    .when('/students/assignments/assignment-detail', {
+      templateUrl: 'courses/assignment-detail.html',
+      controller: 'assignmentDetail'
+    })
     .when('/lecturers/dashboard', {
       templateUrl: 'lecturer-dashboard.template.html',
       controller: 'lecturerDashboard'
