@@ -2,7 +2,7 @@ angular
   .module('assignments')
   .controller('viewAssignment', viewAssignmentController)
 
-function viewAssignmentController($scope, $routeParams, $http) {
+function viewAssignmentController($scope, $routeParams, store) {
   $scope.course = {
     code: $routeParams.course
   }
@@ -31,32 +31,6 @@ function viewAssignmentController($scope, $routeParams, $http) {
     grade: null
   }]
 
-  $http({
-    method: 'GET',
-    url: `https://caab.sim.vuw.ac.nz/api/bennetcarl2/course.${$scope.course.code}.json`
-  }).then(response => {
-    const course = response.data
-
-    $scope.course = {
-      code: course.ID,
-      title: course.Name,
-      overview: course.Overview,
-      year: course.Year,
-      trimester: course.Trimester,
-      lectureTimes: course.LectureTimes,
-      lecturerId: course.LecturerID
-    }
-  })
-
-  $http({
-    method: 'GET',
-    url: `https://caab.sim.vuw.ac.nz/api/bennetcarl2/assignment.${$scope.assignment.id}.json`
-  }).then(({ data: assignment }) => {
-    $scope.assignment = {
-      name: assignment.Name,
-      overview: assignment.Overview,
-      courseId: assignment.CourseID,
-      dueDate: assignment.DueDate
-    }
-  })
+  store.get('courses', $scope.course.id).then(course => $scope.course = course)
+  store.get('assignments', $scope.assignment.id).then(assignment => $scope.assignment = assignment)
 }
