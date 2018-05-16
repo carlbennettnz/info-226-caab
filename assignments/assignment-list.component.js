@@ -2,7 +2,7 @@ angular
   .module('assignments')
   .component('assignmentList', {
     templateUrl: 'assignments/assignment-list.template.html',
-    bindings: { course: '<' },
+    bindings: { course: '<', context: '@' },
     controller: assignmentListController
   })
 

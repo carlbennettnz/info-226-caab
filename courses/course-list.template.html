@@ -2,7 +2,9 @@
 
 <ul class="course-list">
   <li ng-repeat="course in courses">
-    <strong>{{course.id}}:</strong>
-    {{course.name}}
+    <a ng-href="#!/students/courses/{{course.id}}">
+      <strong>{{course.id}}:</strong>
+      {{course.name}}
+    </a>
   </li>
 </ul>

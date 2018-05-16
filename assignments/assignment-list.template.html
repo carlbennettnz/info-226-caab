@@ -2,7 +2,7 @@
 
 <table class="assignments">
   <tr ng-repeat="assignment in assignments">
-    <td><a ng-href="#!/lecturers/courses/{{$ctrl.course.id}}/assignments/{{assignment.id}}">{{assignment.name}}</a></td>
+    <td><a ng-href="#!/{{$ctrl.context}}/courses/{{$ctrl.course.id}}/assignments/{{assignment.id}}">{{assignment.name}}</a></td>
     <td>{{assignment.dueDate | date:'dd/MM/yyyy'}}</td>
   </tr>
 </table>

@@ -5,13 +5,7 @@
 
 <div class="page">
   <div class="side">
-    <h1>Manage Course</h1>
-
-    <nav>
-      <ul>
-        <li><a ng-href="#!/lecturers/courses/{{course.id}}/assignments/new">Add Assignment</a></li>
-      </ul>
-    </nav>
+    <h1>{{course.id}}</h1>
   </div>
 
   <div class="cards">
@@ -42,14 +36,9 @@
           <span class="label-text">Lecture Times</span>
           <input type="text" ng-model="course.lectureTimes">
         </label>
-
-        <div class="actions">
-          <input type="submit" value="Delete" class="delete-btn" />
-          <input type="submit" value="Save Course Details" />
-        </div>
       </form>
     </div>
     
-    <assignment-list course="course" context="lecturers" class="card"></assignment-list>
+    <assignment-list course="course" context="students" class="card"></assignment-list>
   </div>
 </div>
