@@ -558,12 +558,21 @@ table.assignments tr:last-child td { border-bottom: none; }
   border-bottom-color: #e4e4e4;
 }
 
-.qa .answer input {
+.qa .answer input,
+.new-question {
   width: 300px;
   padding: 5px;
   margin: -5px;
   border: none;
   font: inherit;
+}
+
+.new-question {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  width: calc(100% - 60px);
+  margin-left: 60px;
+  border-radius: 4px;
 }
 
 table.submissions {
