@@ -36,16 +36,17 @@
       <span ng-if="!questions">No questions yet.</span>
       
       <div class="qa">
-        <div class="thread" ng-repeat="question in questions" ng-if="question.answer">
+        <div class="thread" ng-repeat="question in questions">
           <div class="question-asker">{{question.asker}}</div>
           <div class="question">{{question.question}}</div>
-          <div class="answer">
-            <span ng-if="question.answer">{{question.answer}}</span>
-          </div>
+          <div class="answer" ng-if="question.answer">{{question.answer}}</div>
+        </div>
+
+        <div class="input new-question">
+          <input ng-model="newQuestion" placeholder="Enter your question here…" />
+          <button ng-click="ask()">Send</button>
         </div>
       </div>
-        
-      <input class="new-question" ng-model="newQuestion" placeholder="Enter your question here…" />
     </div>
     
     <div class="card wide">

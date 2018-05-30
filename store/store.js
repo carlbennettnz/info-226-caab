@@ -6,13 +6,11 @@ class Store {
     this.location = 'https://caab.sim.vuw.ac.nz/api'
     this.namespace = localStorage.store || 'carlandtarryn'
 
-    this._lock = $q.resolve()
-
     this._lock = this._checkCustomSchemaInPlace().then(inPlace => {
       if (!inPlace && confirm('Initialise custom schema?')) {
-        this._loadAll().then(this._storeCustomSchema.bind(this))
+        return this._loadAll().then(this._storeCustomSchema.bind(this))
       }
-    })
+    }).catch(err => console.error(err))
   }
 
   get(model, filter) {
@@ -28,22 +26,36 @@ class Store {
   }
 
   save(model, updated) {
-    return this._lock
-      .then(() => this._lock = this._getAll(model))
+    return this._lock = this._lock
+      .then(() => this._getAll(model))
       .then(records => records.map(r => r.id).includes(updated.id)
         ? records.map((record, i) => record.id === updated.id ? updated : record)
         : [ ...records, updated ])
       .then(records => this._save(model, records))
   }
 
-  async delete(model, record) {
-    const id = typeof record === 'object' ? record.id : record
-    
-    await this._lock
+  create(model, record) {
+    let recordWithId
 
-    return this._lock = this._getAll(model)
+    return this._lock = this._lock
+      .then(() => this._getAll(model))
+      .then(records => this._addNewRecord(records, record))
+      .then(records => { recordWithId = records.slice(-1)[0]; return records; })
+      .then(records => this._save(model, records))
+      .then(() => recordWithId)
+  }
+
+  delete(model, record) {
+    const id = typeof record === 'object' ? record.id : record
+
+    console.log(record.id)
+  
+    return this._lock = this._lock
+      .then(() => this._getAll(model))
+      .then(r => { console.log('before', r.length); return r; })
       .then(records => records.filter(r => r.id !== id))
-      .then(records => this._delete(model, records))
+      .then(r => { console.log('after', r.length); return r; })
+      .then(records => this._save(model, records))
   }
 
   get namespacedLocation() {
@@ -53,7 +65,8 @@ class Store {
   _checkCustomSchemaInPlace() {
     return this.$http.get(`${this.namespacedLocation}/assignment.__CUSTOM_SCHEMA__.json`)
       .then(res => res.data)
-      .then(record => record && !record.Message !== 'An error has occured.')
+      .then(record => record && record.Message !== 'An error has occurred.')
+      .catch(err => err.data && err.data.Message !== 'An error has occurred.')
   }
 
   async _loadAll() {
@@ -67,6 +80,8 @@ class Store {
         .then(res => res.data)
         .then(deserialise)
     }
+
+    db.themes = []
 
     return db
   }
@@ -119,6 +134,22 @@ class Store {
     )
   }
 
+  _addNewRecord(existing, record) {
+    if (record.id == null) {
+      if (existing.length && typeof existing[0].id === 'string') {
+        throw new Error('You tried to create a new record without an ID, but model type uses string IDs. You need to provide an ID.')
+      }
+
+      const lastId = existing.length
+        ? existing.map(r => r.id).sort().slice(-1)[0]
+        : 0
+      
+      record.id = lastId + 1
+    }
+
+    return [ ...existing, record ]
+  }
+
   async _save(model, records) {
     const method = 'POST'
     const url = `${this.namespacedLocation}/update.assignment_directory.json`
@@ -131,9 +162,5 @@ class Store {
     }
 
     await this.$http({ method, url, data })
-  }
-
-  async _delete(model, id) {
-
   }
 }

@@ -2,24 +2,16 @@ angular
   .module('assignments')
   .controller('viewAssignment', viewAssignmentController)
 
-function viewAssignmentController($scope, $routeParams, store) {
+function viewAssignmentController($scope, $routeParams, store, session) {
   $scope.course = {
     code: $routeParams.course
   }
 
   $scope.assignment = {
-    id: $routeParams.assignment
+    id: Number($routeParams.assignment)
   }
 
-  $scope.questions = [{
-    asker: 'Carl Bennett',
-    question: 'hello i am stuck pls help',
-    answer: 'no'
-  }, {
-    asker: 'John Doe',
-    question: 'what is the answer to #3',
-    answer: null
-  }]
+  $scope.questions = []
 
   $scope.submissions = [{
     studentName: 'Tarryn Palmer',
@@ -33,4 +25,15 @@ function viewAssignmentController($scope, $routeParams, store) {
 
   store.get('courses', $scope.course.id).then(course => $scope.course = course)
   store.get('assignments', $scope.assignment.id).then(assignment => $scope.assignment = assignment)
+  store.get('questions', q => q.assignmentId = $scope.assignment.id).then(qs => $scope.questions = qs).then(console.log)
+
+  $scope.ask = () => {
+    console.log($scope.assignment)
+    store.create('questions', {
+      assignmentId: $scope.assignment.id,
+      question: $scope.newQuestion,
+      asker: session.getUser().loginName,
+      answer: null
+    }).then(q => $scope.questions.push(q))
+  }
 }

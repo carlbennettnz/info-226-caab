@@ -29,8 +29,8 @@
         </label>
 
         <div class="actions">
-          <input type="submit" value="Delete" class="delete-btn" />
-          <input type="submit" value="Save Assignment Details" />
+          <input type="submit" value="Delete" ng-click="delete()" class="delete-btn" />
+          <input type="submit" value="Save Assignment Details" ng-click="save()" />
         </div>
       </form>
     </div>
@@ -38,7 +38,7 @@
     <div class="card wide">
       <h2>Student Questions</h2>
 
-      <span ng-if="!questions">No questions yet.</span>
+      <span ng-if="!questions.length">No questions yet.</span>
       
       <div class="qa">
         <div class="thread" ng-repeat="question in questions">
@@ -46,7 +46,11 @@
           <div class="question">{{question.question}}</div>
           <div class="answer">
             <span ng-if="question.answer">{{question.answer}}</span>
-            <input ng-if="!question.answer" ng-model="question.draftAnswer" />
+
+            <div class="input" ng-if="!question.answer">
+              <input ng-model="question.draftAnswer" />
+              <button ng-click="saveAnswer(question.id)">Send</button>
+            </div>
           </div>
         </div>
       </div>

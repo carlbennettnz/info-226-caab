@@ -519,7 +519,8 @@ table.assignments tr:last-child td { border-bottom: none; }
   margin-bottom: 10px;
 }
 
-.qa .thread::before {
+.qa .thread::before,
+.qa .new-question::before {
   content: 'Q';
   background-color: #ddd;
   display: flex;
@@ -558,21 +559,32 @@ table.assignments tr:last-child td { border-bottom: none; }
   border-bottom-color: #e4e4e4;
 }
 
-.qa .answer input,
-.new-question {
+.qa .input {
+  display: flex;
+}
+
+.qa .input input {
   width: 300px;
   padding: 5px;
-  margin: -5px;
-  border: none;
+  border: 1px solid #ccc;
+  border-right: none;
   font: inherit;
 }
 
-.new-question {
-  margin-top: 20px;
-  border: 1px solid #ccc;
+.qa .input button {
+  background-color: #004730;
+  color: white;
+  font: inherit;
+  padding: 0 0.8em;
+  border: none;
+}
+
+.qa .new-question {
+  padding-top: 5px;
   width: calc(100% - 60px);
-  margin-left: 60px;
+  padding-left: 60px;
   border-radius: 4px;
+  position: relative;
 }
 
 table.submissions {
