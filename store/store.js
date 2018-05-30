@@ -34,27 +34,46 @@ class Store {
       .then(records => this._save(model, records))
   }
 
-  create(model, record) {
-    let recordWithId
+  create(model, recordOrRecords) {
+    let recordsWithIds
+    
+    const records = Array.isArray(recordOrRecords)
+      ? recordOrRecords
+      : [ recordOrRecords ]
 
     return this._lock = this._lock
       .then(() => this._getAll(model))
-      .then(records => this._addNewRecord(records, record))
-      .then(records => { recordWithId = records.slice(-1)[0]; return records; })
+      .then(existing => this._addNewRecords(existing, records))
+      .then(pre => { console.log('pre create', pre); return pre; })
+      .then(records => { recordsWithIds = records.slice(-records.length); return records; })
       .then(records => this._save(model, records))
-      .then(() => recordWithId)
+      .then(() => Array.isArray(recordOrRecords) ? recordsWithIds : recordsWithIds[0])
   }
 
-  delete(model, record) {
-    const id = typeof record === 'object' ? record.id : record
+  delete(model, filter) {
+    return this.$q.resolve(
+      this._lock.then(() => {
+        switch (typeof filter) {
+          case 'function': return this._deleteByPredicate(model, filter)
+          default: return this._deleteById(model)
+        }
+      })
+    )
+  }
 
-    console.log(record.id)
+  _deleteByPredicate(model, predicate) {
+    return this._lock = this._lock
+      .then(() => this._getAll(model))
+      .then(records => records.filter(r => !predicate(r)))
+      .then(records => this._save(model, records))
+  }
+
+  _deleteById(model, record) {
+    const id = typeof record === 'object' ? record.id : record
   
     return this._lock = this._lock
       .then(() => this._getAll(model))
-      .then(r => { console.log('before', r.length); return r; })
       .then(records => records.filter(r => r.id !== id))
-      .then(r => { console.log('after', r.length); return r; })
       .then(records => this._save(model, records))
   }
 
@@ -134,20 +153,23 @@ class Store {
     )
   }
 
-  _addNewRecord(existing, record) {
-    if (record.id == null) {
-      if (existing.length && typeof existing[0].id === 'string') {
-        throw new Error('You tried to create a new record without an ID, but model type uses string IDs. You need to provide an ID.')
+  _addNewRecords(existing, records) {
+    let nextId = existing.length
+      ? existing.map(r => r.id).sort().slice(-1)[0] + 1
+      : 0
+
+    for (const record of records) {
+      if (record.id == null) {
+        if (existing.length && typeof existing[0].id === 'string') {
+          throw new Error('You tried to create a new record without an ID, but model type uses string IDs. You need to provide an ID.')
+        }
+        
+        record.id = nextId
+        nextId += 1
       }
-
-      const lastId = existing.length
-        ? existing.map(r => r.id).sort().slice(-1)[0]
-        : 0
-      
-      record.id = lastId + 1
     }
-
-    return [ ...existing, record ]
+    
+    return [ ...existing, ...records ]
   }
 
   async _save(model, records) {
