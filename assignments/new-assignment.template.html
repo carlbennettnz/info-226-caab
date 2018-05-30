@@ -12,7 +12,7 @@
     <div class="card wide">
       <h2>Assignment Details</h2>
       
-      <form class="horizontal" ng-submit="save()">
+      <form class="horizontal" name="new" ng-submit="save()">
         <label class="row">
           <span class="label-text">Name</span>
           <input type="text" ng-model="assignment.name">
@@ -27,6 +27,8 @@
           <span class="label-text">Due Date</span>
           <input type="text" ng-model="assignment.dueDate">
         </label>
+        
+        <div class=
 
         <div class="actions">
           <input type="submit" value="Delete" class="delete-btn" />

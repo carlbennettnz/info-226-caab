@@ -18,5 +18,12 @@ function newAssignmentController($scope, $routeParams, $location, store) {
       courseId: $scope.course.id,
       dueDate: $scope.assignment.dueDate
     }).then(() => $location.path('/lecturers/courses/' + $scope.course.id))
-  }
+
+    $scope.validationErrors = validateAssignment($scope.assignment)
+    
+    if ($scope.validationErrors.length === 0) {
+      store.save('assignments', $scope.assignment)
+      .then(() => alert('Assignment created'))
+    }
+  }  
 }

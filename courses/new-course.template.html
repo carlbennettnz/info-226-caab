@@ -12,39 +12,47 @@
     <div class="card">
       <h2>Course Details</h2>
 
-      <form class="horizontal">
+      <form class="horizontal" name="new">
         <label class="row">
           <span class="label-text">Code</span>
-          <input type="text" ng-model="course.code">
+          <input type="text" ng-model="course.code" ng-required="required">
+          <span class="prompt" ng-show="new.course.code.$invalid && !new.course.code.$pristine">*</span>
         </label>
-
+        
         <label class="row">
           <span class="label-text">Title</span>
-          <input type="text" ng-model="course.title">
+          <input type="text" ng-model="course.title" ng-required="required">
+          <span class="prompt" ng-show="new.course.title.$invalid && !new.course.title.$pristine" >*</span>
         </label>
         
         <label class="row">
           <span class="label-text">Overview</span>
-          <input type="text" ng-model="course.overview">
+          <input type="text" ng-model="course.overview" ng-required="required">
         </label>
         
         <label class="row">
           <span class="label-text">Year</span>
-          <input type="text" ng-model="course.year">
+          <input type="text" ng-model="course.year" ng-required="required"> 
         </label>
         
         <label class="row">
           <span class="label-text">Trimester</span>
-          <input type="text" ng-model="course.trimester">
+          <input type="text" ng-model="course.trimester" ng-required="required">
         </label>
         
         <label class="row">
           <span class="label-text">Lecture Times</span>
-          <input type="text" ng-model="course.lectureTimes">
+          <input type="text" ng-model="course.lectureTimes" ng-required="required">
         </label>
 
+        <div class="validation">
+          <ul>
+            <li ng-repeat="error in validationErrors">{{error}}</li>
+          </ul>
+        </div>
+
         <div class="actions">
-          <input type="submit" value="Add Course" />
+          <input type="submit" value="Add Course"/>
         </div>
       </form>
     </div>
