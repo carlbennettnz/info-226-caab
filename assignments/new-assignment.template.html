@@ -28,7 +28,11 @@
           <input type="text" ng-model="assignment.dueDate">
         </label>
         
-        <div class=
+        <div class="validation">
+          <ul>
+            <li ng-repeat="error in validationErrors">{{error}}</li>
+          </ul>
+        </div>
 
         <div class="actions">
           <input type="submit" value="Delete" class="delete-btn" />

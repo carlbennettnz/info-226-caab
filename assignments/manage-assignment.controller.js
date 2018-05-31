@@ -32,8 +32,15 @@ function manageAssignmentController($scope, $routeParams, $location, store) {
 
   store.get('questions').then(console.log)
 
-  $scope.save = () => store.save('assignments', $scope.assignment)
+  $scope.save = () => {
+    
+    $scope.validatorErrors = validateAssignment($scope.assignment)
+
+      if ($scope.validationErrors.length === O) {
+      store.save('assignments', $scope.assignment)
     .then(() => alert('Saved!'))
+    }
+  }
 
   $scope.delete = () => store.delete('assignments', $scope.assignment)
     .then(() => $location.path('/lecturers/courses/' + $scope.course.id))

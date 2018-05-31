@@ -5,8 +5,4 @@ angular
 function newCourseController($scope) {
   $scope.course = {}
 
-  $scope.maxlength = 1;
-  
- 
-  
 }
