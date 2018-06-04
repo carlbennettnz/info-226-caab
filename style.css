@@ -399,6 +399,11 @@ form.horizontal .row {
   align-items: center;
 }
 
+form.horizontal .row select {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
 form.horizontal .label-text {
   display: block;
   width: 120px;

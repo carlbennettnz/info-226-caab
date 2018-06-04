@@ -44,5 +44,9 @@ function configureApp($routeProvider) {
       templateUrl: 'assignments/manage-assignment.template.html',
       controller: 'manageAssignment'
     })
+    .when('/lecturers/add-user', {
+      templateUrl: 'accounts/add-user.template.html',
+      controller: 'addUser'
+    })
     .otherwise('/login')
 }

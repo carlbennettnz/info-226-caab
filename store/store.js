@@ -45,8 +45,8 @@ class Store {
       .then(() => this._getAll(model))
       .then(existing => this._addNewRecords(existing, records))
       .then(pre => { console.log('pre create', pre); return pre; })
-      .then(records => { recordsWithIds = records.slice(-records.length); return records; })
-      .then(records => this._save(model, records))
+      .then(allRecords => { recordsWithIds = allRecords.slice(-records.length); return allRecords; })
+      .then(allRecords => this._save(model, allRecords))
       .then(() => Array.isArray(recordOrRecords) ? recordsWithIds : recordsWithIds[0])
   }
 
