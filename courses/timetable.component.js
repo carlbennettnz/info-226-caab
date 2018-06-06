@@ -5,28 +5,15 @@ angular
     controller: timetableComponent
   })
 
-function timetableComponent($scope, store) {
+function timetableComponent($scope, store, session) {
   $scope.timeslots = getBlankTimetable()
 
-  $scope.timeslots[3].days[1] = {
-    ...$scope.timeslots[3].days[1],
-    code: 'INFO226'
-  }
+  const user = session.getUser()
 
-  $scope.timeslots[3].days[3] = {
-    ...$scope.timeslots[3].days[3],
-    code: 'INFO226'
-  }
-
-  $scope.timeslots[6].days[1] = {
-    ...$scope.timeslots[3].days[1],
-    code: 'INFO226'
-  }
-
-  $scope.timeslots[6].days[3] = {
-    ...$scope.timeslots[3].days[3],
-    code: 'INFO226'
-  }
+  store.get('courseAssociations', assoc => assoc.studentId === user.id)
+    .then(assocs => assocs.map(assoc => assoc.courseId))
+    .then(courseIds => store.get('courses', course => courseIds.includes(course.id)))
+    .then(courses => courses.forEach(course => fillTimetable($scope.timeslots, course)))
 }
 
 function getBlankTimetable() {
@@ -35,7 +22,7 @@ function getBlankTimetable() {
   for (let i = 0; i < 10; i++) {
     const slot = {}
 
-    slot.time = `${(i + 7) % 12 + 1}:00 ${i > 4 ? 'PM' : 'AM'}`
+    slot.time = `${(i + 7) % 12 + 1}:00 ${i >= 4 ? 'PM' : 'AM'}`
     slot.days = []
 
     for (let j = 0; j < 5; j++) {
@@ -46,4 +33,17 @@ function getBlankTimetable() {
   }
 
   return timetable
+}
+
+function fillTimetable(timetable, course) {
+  const [ dayStr, timeStr ] = course.lectureTimes.split(' ')
+  const day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].indexOf(dayStr)
+  let time = parseInt(timeStr.match(/\d+/)[0], 10) - 8
+  
+  if (/pm/i.test(timeStr) && time !== 4) time += 12
+
+  timetable[time].days[day] = {
+    ...timetable[time].days[day],
+    code: course.id 
+  }
 }
