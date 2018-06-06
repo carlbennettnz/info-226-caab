@@ -1,6 +1,6 @@
 <h2>My Course List</h2>
 
-<span ng-hide="courses.length">You haven't signed up to any courses yet.</span>
+<span ng-hide="courses.length || loading">You haven't signed up to any courses yet.</span>
 
 <ul class="course-list">
   <li ng-repeat="course in courses">

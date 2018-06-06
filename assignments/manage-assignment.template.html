@@ -65,7 +65,7 @@
 
       <span ng-if="!submissions.length">No submissions yet.</span>
       
-      <table class="submissions.length">
+      <table class="submissions">
         <tr ng-repeat="submission in submissions">
           <td>{{submission.studentName}}</td>
           <td>{{submission.submissionDate | date:'dd/MM/yyyy'}}</td>
@@ -76,7 +76,7 @@
         </tr>
       </table>
 
-      <input type="submit" value="Save Grades" ng-click="saveGrades()" />
+      <input type="submit" ng-show="submissions.length" value="Save Grades" ng-click="saveGrades()" />
     </div>
   </div>
 </div>

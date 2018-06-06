@@ -7,6 +7,7 @@ angular
 
 function courseListComponent($scope, store, session) {
   $scope.courses = []
+  $scope.loading = true
   
   const user = session.getUser()
 
@@ -14,4 +15,5 @@ function courseListComponent($scope, store, session) {
     .then(assocs => assocs.map(assoc => assoc.courseId))
     .then(courseIds => store.get('courses', course => courseIds.includes(course.id)))
     .then(courses => $scope.courses = courses)
+    .then(() => $scope.loading = false)
 }
