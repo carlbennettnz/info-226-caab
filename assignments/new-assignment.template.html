@@ -28,6 +28,10 @@
           <input type="text" ng-model="assignment.dueDate">
         </label>
 
+        <ul class="errors">
+          <li ng-repeat="error in errors">{{error}}</li>
+        </ul>
+
         <div class="actions">
           <input type="submit" value="Delete" class="delete-btn" />
           <input type="submit" value="Save Assignment Details" />

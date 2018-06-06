@@ -9,14 +9,18 @@ function newAssignmentController($scope, $routeParams, $location, store) {
 
   $scope.assignment = {}
 
-  store.get('courses', $routeParams.course).then(course => $scope.course = course).then(console.log)
+  store.get('courses', $routeParams.course).then(course => $scope.course = course)
 
   $scope.save = () => {
+    $scope.errors = []
+
     store.create('assignments', {
       name: $scope.assignment.name,
       overview: $scope.assignment.overview,
       courseId: $scope.course.id,
-      dueDate: $scope.assignment.dueDate
-    }).then(() => $location.path('/lecturers/courses/' + $scope.course.id))
+      dueDate: new Date($scope.assignment.dueDate)
+    })
+      .then(() => $location.path('/lecturers/courses/' + $scope.course.id))
+      .catch(err => $scope.errors = err)
   }
 }
