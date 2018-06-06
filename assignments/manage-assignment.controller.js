@@ -17,7 +17,6 @@ function manageAssignmentController($scope, $routeParams, $location, store) {
   store.get('courses', $scope.course.id).then(course => $scope.course = course)
   store.get('assignments', $scope.assignment.id).then(a => {
     $scope.assignment = a
-    console.log(a.dueDate)
     $scope.dueDate = a.dueDate && !isNaN(a.dueDate)
       ? a.dueDate.toISOString().substr(0, 10)
       : ''
@@ -41,15 +40,34 @@ function manageAssignmentController($scope, $routeParams, $location, store) {
     .then(() => $location.path('/lecturers/courses/' + $scope.course.id))
   
   $scope.saveAnswer = (qId) => {
-    const question = $scope.questions.find(q => q.id = qId)
+    const question = $scope.questions.find(q => q.id === qId)
+
+    $scope.answerErrors = []
+    
+    if (!question || !question.draftAnswer) {
+      $scope.answerErrors.push('You must enter an answer')
+      return
+    }
 
     question.answer = question.draftAnswer
-    $scope.answerErrors = []
 
     store.save('questions', question)
       .catch(err => {
         if (Array.isArray(err)) $scope.answerErrors = err
         else throw err
       })
+  }
+
+  $scope.saveGrades = () => {
+    for (const submission of $scope.submissions) {
+      if (submission.draftGrade) {
+        submission.grade = submission.draftGrade
+        delete submission.draftGrade
+        
+        store.save('submissions', submission)
+          .then(console.log)
+          .catch(console.error)
+      }
+    }
   }
 }

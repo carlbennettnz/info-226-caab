@@ -56,8 +56,19 @@
     <div class="card wide">
       <h2>Submission</h2>
 
-      <input ng-if="!submission" type="file" />
-      <span ng-if="submission" class="submission">Submitted on {{submission.date}}. You got a(n) {{submission.grade}}.</span>
+      <div ng-hide="submission">
+        <textarea ng-model="submissionDraft"></textarea>
+
+        <input type="submit" ng-click="submit()" />
+
+        <ul class="errors">
+          <li ng-repeat="error in submissionErrors">{{error}}</li>
+        </ul>
+      </div>
+
+      <span ng-show="submission" class="submission">Submitted on {{submission.submissionDate | date:'dd/MM/yyyy'}}.</span>
+      <span ng-show="submission && submission.grade" class="submission">You go {{submission.grade}}.</span>
+
     </div>
   </div>
 </div>

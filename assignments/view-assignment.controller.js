@@ -13,19 +13,13 @@ function viewAssignmentController($scope, $routeParams, store, session) {
 
   $scope.questions = []
 
-  $scope.submissions = [{
-    studentName: 'Tarryn Palmer',
-    submissionDate: new Date('2018-05-02'),
-    grade: 'A+'
-  }, {
-    studentName: 'Carl Bennett',
-    submissionDate: new Date('2018-05-15'),
-    grade: null
-  }]
+  const user = session.getUser()
 
   store.get('courses', $scope.course.id).then(course => $scope.course = course)
   store.get('assignments', $scope.assignment.id).then(assignment => $scope.assignment = assignment)
-  store.get('questions', q => q.assignmentId = $scope.assignment.id).then(qs => $scope.questions = qs).then(console.log)
+  store.get('questions', q => q.assignmentId = $scope.assignment.id).then(qs => $scope.questions = qs)
+  store.get('submissions', s => s.assignmentId = $scope.assignment.id && s.studentName === user.loginName)
+    .then(ss => $scope.submission = ss && ss[0])
 
   $scope.ask = () => {
     $scope.askErrors = []
@@ -33,9 +27,23 @@ function viewAssignmentController($scope, $routeParams, store, session) {
     store.create('questions', {
       assignmentId: $scope.assignment.id,
       question: $scope.newQuestion,
-      asker: session.getUser().loginName,
+      asker: user.loginName,
       answer: null
     }).then(q => $scope.questions.push(q))
     .catch(err => $scope.askErrors = err)
+  }
+
+  $scope.submit = () => {
+    $scope.submissionErrors = []
+
+    store.create('submissions', {
+      studentName: user.loginName,
+      submissionDate: new Date(),
+      assignmentId: $scope.assignment.id,
+      content: $scope.submissionDraft,
+      grade: null
+    })
+      .then(s => $scope.submission = s)
+      .catch(err => $scope.submissionErrors = err)
   }
 }

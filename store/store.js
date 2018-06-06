@@ -4,7 +4,7 @@ class Store {
     this.$q = $q
 
     this.location = 'https://caab.sim.vuw.ac.nz/api'
-    this.namespace = localStorage.store || 'carlandtarryn3'
+    this.namespace = localStorage.store || 'carlandtarryn4'
     this.models = {
       assignments: AssignmentModel,
       courses: CourseModel,
@@ -56,7 +56,6 @@ class Store {
       return this._lock = this._lock
         .then(() => this._getAll(model))
         .then(existing => this._addNewRecords(existing, records))
-        .then(pre => { console.log('pre create', pre); return pre; })
         .then(allRecords => { recordsWithIds = allRecords.slice(-records.length); return allRecords; })
         .then(allRecords => this._save(model, allRecords))
         .then(() => Array.isArray(recordOrRecords) ? recordsWithIds : recordsWithIds[0])

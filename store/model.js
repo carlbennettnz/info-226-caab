@@ -4,7 +4,6 @@ const Model = {
 
     for (const attr in attrs) {
       try {
-        console.log(attrs[attr])
         attrs[attr](attr, values[attr])
       } catch (err) {
         errors.push(err.message)
