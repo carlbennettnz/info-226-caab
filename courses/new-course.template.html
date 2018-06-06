@@ -12,15 +12,15 @@
     <div class="card">
       <h2>Course Details</h2>
 
-      <form class="horizontal">
+      <form class="horizontal" ng-submit="save()">
         <label class="row">
           <span class="label-text">Code</span>
-          <input type="text" ng-model="course.code">
+          <input type="text" ng-model="course.id">
         </label>
 
         <label class="row">
-          <span class="label-text">Title</span>
-          <input type="text" ng-model="course.title">
+          <span class="label-text">Name</span>
+          <input type="text" ng-model="course.name">
         </label>
         
         <label class="row">
@@ -42,6 +42,10 @@
           <span class="label-text">Lecture Times</span>
           <input type="text" ng-model="course.lectureTimes">
         </label>
+
+        <ul class="errors">
+          <li ng-repeat="error in errors">{{error}}</li>
+        </ul>
 
         <div class="actions">
           <input type="submit" value="Add Course" />
