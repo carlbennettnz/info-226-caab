@@ -9,7 +9,10 @@ class Store {
       assignments: AssignmentModel,
       courses: CourseModel,
       courseAssociations: CourseAssociationModel,
-      users: UserModel
+      users: UserModel,
+      submissions: SubmissionModel,
+      questions: QuestionModel,
+      themes: ThemeModel
     }
 
     this._lock = this._checkCustomSchemaInPlace().then(inPlace => {
@@ -144,9 +147,12 @@ class Store {
   }
 
   _getAll(model) {
+    const fromJSON = this.models[model].fromJSON || (a => a)
+
     return this.$q.resolve(
       this.$http.get(`${this.namespacedLocation}/assignment.${model}.json`)
         .then(({ data }) => (data.Name && JSON.parse(data.Name)) || [])
+        .then(records => records.map(fromJSON))
         .catch(err => [])
     )
   }
@@ -183,11 +189,12 @@ class Store {
   }
 
   async _save(model, records) {
+    const toJSON = this.models[model].toJSON || (a => a)
     const method = 'POST'
     const url = `${this.namespacedLocation}/update.assignment_directory.json`
     const data = {
       ID: model,
-      Name: JSON.stringify(records),
+      Name: JSON.stringify(records.map(toJSON)),
       Overview: null,
       CourseID: null,
       DueDate: null

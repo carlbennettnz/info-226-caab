@@ -21,6 +21,7 @@ class Attr {
 
     if (typeName === 'date') {
       assert(this.value instanceof Date, msg)
+      assert(!isNaN(this.value), msg)
       return this
     }
 

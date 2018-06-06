@@ -20,5 +20,14 @@ const AssignmentModel = {
       courseId: record.CourseID,
       dueDate: new Date(record.DueDate).toISOString()
     }))
+  },
+
+  fromJSON(pojo) {
+    return { ...pojo, dueDate: new Date(pojo.dueDate) }
+  },
+
+  toJSON(pojo) {
+    const dueDate = pojo.dueDate && !isNaN(pojo.dueDate) ? pojo.dueDate.toISOString().substr(0, 10) : null
+    return { ...pojo, dueDate }
   }
 }

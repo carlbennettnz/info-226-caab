@@ -11,29 +11,31 @@ function manageAssignmentController($scope, $routeParams, $location, store) {
     id: Number($routeParams.assignment)
   }
 
-  $scope.submissions = [{
-    studentName: 'Tarryn Palmer',
-    submissionDate: new Date('2018-05-02'),
-    grade: 'A+'
-  }, {
-    studentName: 'Carl Bennett',
-    submissionDate: new Date('2018-05-15'),
-    grade: null
-  }]
-
+  $scope.submissions = []
   $scope.questions = []
 
   store.get('courses', $scope.course.id).then(course => $scope.course = course)
-  store.get('assignments', $scope.assignment.id).then(a => $scope.assignment = a)
-  store.get('questions', q => q.assignmentId = $scope.assignment.id).then(qs => {
-    console.log(qs)
-    $scope.questions = qs
+  store.get('assignments', $scope.assignment.id).then(a => {
+    $scope.assignment = a
+    console.log(a.dueDate)
+    $scope.dueDate = a.dueDate && !isNaN(a.dueDate)
+      ? a.dueDate.toISOString().substr(0, 10)
+      : ''
   })
+  store.get('submissions', s => s.assignmentId = $scope.assignment.id).then(ss => $scope.submissions = ss)
+  store.get('questions', q => q.assignmentId = $scope.assignment.id).then(qs => $scope.questions = qs)
 
-  store.get('questions').then(console.log)
+  $scope.save = () => {
+    $scope.assignment.dueDate = new Date($scope.dueDate)
+    console.log($scope.assignment.dueDate)
 
-  $scope.save = () => store.save('assignments', $scope.assignment)
-    .then(() => alert('Saved!'))
+    store.save('assignments', $scope.assignment)
+      .then(() => alert('Saved!'))
+      .catch(err => {
+        if (Array.isArray(err)) $scope.errors = err
+        else throw err
+      })
+  }
 
   $scope.delete = () => store.delete('assignments', $scope.assignment)
     .then(() => $location.path('/lecturers/courses/' + $scope.course.id))
@@ -44,5 +46,9 @@ function manageAssignmentController($scope, $routeParams, $location, store) {
     question.answer = question.draftAnswer
 
     store.save('questions', question)
+      .catch(err => {
+        if (Array.isArray(err)) $scope.answerErrors = err
+        else throw err
+      })
   }
 }
