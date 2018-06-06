@@ -25,8 +25,12 @@
         
         <label class="row">
           <span class="label-text">Due Date</span>
-          <input type="text" ng-model="assignment.dueDate">
+          <input type="text" ng-model="dueDate">
         </label>
+
+        <ul class="errors">
+          <li ng-repeat="error in errors">{{error}}</li>
+        </ul>
 
         <div class="actions">
           <input type="submit" value="Delete" ng-click="delete()" class="delete-btn" />
@@ -59,9 +63,9 @@
     <div class="card wide">
       <h2>Submissions</h2>
 
-      <span ng-if="!submissions">No submissions yet.</span>
+      <span ng-if="!submissions.length">No submissions yet.</span>
       
-      <table class="submissions">
+      <table class="submissions.length">
         <tr ng-repeat="submission in submissions">
           <td>{{submission.studentName}}</td>
           <td>{{submission.submissionDate | date:'dd/MM/yyyy'}}</td>

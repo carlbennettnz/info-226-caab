@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Model Test</title>
+</head>
+<body>
+  <script src="model.js"></script>
+  <script src="define-model-property.js"></script>
+  <script src="attr.js"></script>
+  <script src="models/assignments.js"></script>
+  <script>
+    new AssignmentModel({
+      id: 1,
+      name: 'Assignment 1',
+      overview: 'do shit',
+      courseId: 'COUR123',
+      dueDate: new Date('2018-02-02')
+    })
+  </script>
+</body>
+</html>

@@ -28,6 +28,10 @@
           <select ng-model="user.userType" ng-options="type for type in userTypes"></select>
         </label>
 
+        <ul class="errors">
+          <li ng-repeat="error in errors">{{error}}</li>
+        </ul>
+
         <div class="actions">
           <input type="submit" value="Create User" />
         </div>
