@@ -303,7 +303,7 @@ account-menu .account-dropdown .colour.selected {
 
 .stats {
   display: flex;
-  padding-top: 10px;
+  height: 85px;
 }
 
 .stat .number {
