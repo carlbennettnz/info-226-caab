@@ -21,7 +21,7 @@ body {
 .page-header h1 {
   margin: 0 auto 0 0;
   font-size: 20px;  
-  font-family: 'Proxima Nova';
+  font-family: 'Proxima Nova', sans-serif;
   font-weight: normal;
 }
 
@@ -309,7 +309,7 @@ account-menu .account-dropdown .colour.selected {
 .stat .number {
   font-size: 60px;
   color: #555;
-  font-family: 'Proxima Nova';
+  font-family: 'Proxima Nova', sans-serif;
   font-weight: 100;
 }
 
@@ -351,7 +351,7 @@ account-menu .account-dropdown .colour.selected {
   color: white;
   line-height: 1;
   font-size: 45px;
-  font-family: 'Proxima Nova';
+  font-family: 'Proxima Nova', sans-serif;
   font-weight: 300;
   text-align: center;
 }
@@ -376,7 +376,7 @@ account-menu .account-dropdown .colour.selected {
   text-align: center;
   color: #fffd;
   font-size: 18px;
-  font-family: 'Proxima Nova';
+  font-family: 'Proxima Nova', sans-serif;
   display: block;
   padding: 0.8em;
   background-color: rgba(0, 0, 0, 0.2);
