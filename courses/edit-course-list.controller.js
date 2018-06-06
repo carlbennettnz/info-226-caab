@@ -2,7 +2,7 @@ angular
   .module('courses')
   .controller('editCourseList', editCourseListController)
 
-function editCourseListController($scope, $q, store, session) {
+function editCourseListController($scope, $q, $location, store, session) {
   $scope.courses = []
   $scope.currentCourses = []
   
@@ -28,5 +28,5 @@ function editCourseListController($scope, $q, store, session) {
     .then(() => $scope.courses.filter(course => course.taking))
     .then(courses => courses.map(course => ({ studentId: student.id, courseId: course.id })))
     .then(assocs => store.create('courseAssociations', assocs))
-    .then(() => alert('Saved!'))
+    .then(() => $location.path('/students/dashboard'))
 }
