@@ -16,5 +16,6 @@ function addUserController($scope, store) {
     store.create('users', $scope.user)
       .then(() => $scope.user = { userType: 'student' })
       .then(() => alert('Saved!'))
+      .catch(err => Array.isArray(err) && ($scope.errors = err))
   }
 }
