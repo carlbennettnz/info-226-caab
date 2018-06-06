@@ -4,7 +4,7 @@ const CourseModel = {
 
   validate(course) {
     return Model.validate(course, {
-      id: attr(a => a.type('number')),
+      id: attr(a => a.type('string')),
       name: attr(a => a.type('string').required()),
       overview: attr(a => a.type('string').required()),
       year: attr(a => a.type('number').required()),
@@ -21,7 +21,7 @@ const CourseModel = {
       overview: record.Overview,
       year: record.Year,
       trimester: record.Trimester,
-      lectureTimes: record.LectureTimes ? [record.LectureTimes] : [],
+      lectureTimes: record.LectureTimes,
       lecturerId: Number(record.lecturerId)
     }))
   }

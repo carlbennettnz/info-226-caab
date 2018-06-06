@@ -4,7 +4,7 @@ class Store {
     this.$q = $q
 
     this.location = 'https://caab.sim.vuw.ac.nz/api'
-    this.namespace = localStorage.store || 'carlandtarryn'
+    this.namespace = localStorage.store || 'carlandtarryn3'
     this.models = {
       assignments: AssignmentModel,
       courses: CourseModel,

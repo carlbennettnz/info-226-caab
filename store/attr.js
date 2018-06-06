@@ -55,7 +55,7 @@ class Attr {
   }
 
   required() {
-    if (this.value == null) {
+    if (this.value == null || this.value == '') {
       throw new Error(`The field '${this.name}' is required`)
     }
 

@@ -33,7 +33,7 @@ Store.endpoints = {
         overview: record.Overview,
         year: record.Year,
         trimester: record.Trimester,
-        lectureTimes: record.LectureTimes ? [ record.LectureTimes ] : [],
+        lectureTimes: record.LectureTimes,
         lecturerId: Number(record.lecturerId)
       }))
     }
