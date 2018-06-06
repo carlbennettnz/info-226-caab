@@ -1,17 +1,16 @@
-class Model {
-  constructor(values) {
-    this.values = values
-  }
+const Model = {
+  validate(values, attrs) {
+    const errors = []
 
-  validate(attrs) {
     for (const attr in attrs) {
-      attrs[attr](attr, this.values[attr])
+      try {
+        console.log(attrs[attr])
+        attrs[attr](attr, values[attr])
+      } catch (err) {
+        errors.push(err.message)
+      }
     }
-  }
-}
 
-Model.symbols = {
-  name: Symbol('name'),
-  deserialise: Symbol('deserialise'),
-  endpoint: Symbol('endpoint')
+    return errors
+  }
 }

@@ -5,6 +5,12 @@ class Store {
 
     this.location = 'https://caab.sim.vuw.ac.nz/api'
     this.namespace = localStorage.store || 'carlandtarryn'
+    this.models = {
+      assignments: AssignmentModel,
+      courses: CourseModel,
+      courseAssociations: CourseAssociationModel,
+      users: UserModel
+    }
 
     this._lock = this._checkCustomSchemaInPlace().then(inPlace => {
       if (!inPlace && confirm('Initialise custom schema?')) {
@@ -26,12 +32,14 @@ class Store {
   }
 
   save(model, updated) {
-    return this._lock = this._lock
-      .then(() => this._getAll(model))
-      .then(records => records.map(r => r.id).includes(updated.id)
-        ? records.map((record, i) => record.id === updated.id ? updated : record)
-        : [ ...records, updated ])
-      .then(records => this._save(model, records))
+    return this._validate(model, [ updated ]).then(() => {
+      return this._lock = this._lock
+        .then(() => this._getAll(model))
+        .then(records => records.map(r => r.id).includes(updated.id)
+          ? records.map((record, i) => record.id === updated.id ? updated : record)
+          : [ ...records, updated ])
+        .then(records => this._save(model, records))
+    })
   }
 
   create(model, recordOrRecords) {
@@ -41,13 +49,15 @@ class Store {
       ? recordOrRecords
       : [ recordOrRecords ]
 
-    return this._lock = this._lock
-      .then(() => this._getAll(model))
-      .then(existing => this._addNewRecords(existing, records))
-      .then(pre => { console.log('pre create', pre); return pre; })
-      .then(allRecords => { recordsWithIds = allRecords.slice(-records.length); return allRecords; })
-      .then(allRecords => this._save(model, allRecords))
-      .then(() => Array.isArray(recordOrRecords) ? recordsWithIds : recordsWithIds[0])
+    return this._validate(model, records).then(() => {
+      return this._lock = this._lock
+        .then(() => this._getAll(model))
+        .then(existing => this._addNewRecords(existing, records))
+        .then(pre => { console.log('pre create', pre); return pre; })
+        .then(allRecords => { recordsWithIds = allRecords.slice(-records.length); return allRecords; })
+        .then(allRecords => this._save(model, allRecords))
+        .then(() => Array.isArray(recordOrRecords) ? recordsWithIds : recordsWithIds[0])
+    })
   }
 
   delete(model, filter) {
@@ -184,5 +194,18 @@ class Store {
     }
 
     await this.$http({ method, url, data })
+  }
+
+  _validate(model, records) {
+    const errors = []
+
+    for (const record of records) {
+      if (!this.models[model]) throw new Error('Model does not exist')
+      errors.push(...this.models[model].validate(record))
+    }
+
+    return errors.length
+      ? this.$q.reject(errors)
+      : this.$q.resolve()
   }
 }

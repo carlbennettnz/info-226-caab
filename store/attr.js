@@ -5,7 +5,10 @@ class Attr {
   }
 
   type(typeName) {
+    if (this.value == null) return this
+
     const msg = `Expected the field named '${this.name}' to hold a ${typeName}`
+
     if (typeName === 'number') {
       this.toNumber()
       assert(!Number.isNaN(this.value), msg)
@@ -52,7 +55,7 @@ class Attr {
 
   required() {
     if (this.value == null) {
-      throw new Error(`The env var ${this.name} is required`)
+      throw new Error(`The field '${this.name}' is required`)
     }
 
     return this
