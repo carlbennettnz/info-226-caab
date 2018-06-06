@@ -28,12 +28,14 @@ function viewAssignmentController($scope, $routeParams, store, session) {
   store.get('questions', q => q.assignmentId = $scope.assignment.id).then(qs => $scope.questions = qs).then(console.log)
 
   $scope.ask = () => {
-    console.log($scope.assignment)
+    $scope.askErrors = []
+
     store.create('questions', {
       assignmentId: $scope.assignment.id,
       question: $scope.newQuestion,
       asker: session.getUser().loginName,
       answer: null
     }).then(q => $scope.questions.push(q))
+    .catch(err => $scope.askErrors = err)
   }
 }

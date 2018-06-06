@@ -15,17 +15,17 @@
       <form class="horizontal">
         <label class="row">
           <span class="label-text">Name</span>
-          <input type="text" ng-model="assignment.name">
+          <input type="text" disabled ng-model="assignment.name">
         </label>
         
         <label class="row">
           <span class="label-text">Overview</span>
-          <input type="text" ng-model="assignment.overview">
+          <input type="text" disabled ng-model="assignment.overview">
         </label>
         
         <label class="row">
           <span class="label-text">Due Date</span>
-          <input type="text" ng-bind="assignment.dueDate | date:'dd/MM/yyyy'">
+          <input type="text" disabled ng-bind="assignment.dueDate | date:'dd/MM/yyyy'">
         </label>
       </form>
     </div>
@@ -46,6 +46,10 @@
           <input ng-model="newQuestion" placeholder="Enter your question here…" />
           <button ng-click="ask()">Send</button>
         </div>
+
+        <ul class="errors">
+          <li ng-repeat="error in askErrors">{{error}}</li>
+        </ul>
       </div>
     </div>
     
