@@ -612,3 +612,11 @@ table.submissions input {
   font: inherit;
   margin-left: -8px;
 }
+
+.assignment-submission {
+  width: 100%;
+  height: 120px;
+  font: inherit;
+  padding: 1em;
+  border: 1px solid #ccc;
+}

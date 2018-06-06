@@ -18,8 +18,9 @@ function viewAssignmentController($scope, $routeParams, store, session) {
   store.get('courses', $scope.course.id).then(course => $scope.course = course)
   store.get('assignments', $scope.assignment.id).then(assignment => $scope.assignment = assignment)
   store.get('questions', q => q.assignmentId = $scope.assignment.id).then(qs => $scope.questions = qs)
-  store.get('submissions', s => s.assignmentId = $scope.assignment.id && s.studentName === user.loginName)
+  store.get('submissions', s => s.assignmentId === $scope.assignment.id && s.studentName === user.loginName)
     .then(ss => $scope.submission = ss && ss[0])
+    .then(console.log)
 
   $scope.ask = () => {
     $scope.askErrors = []
