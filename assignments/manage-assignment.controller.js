@@ -27,7 +27,7 @@ function manageAssignmentController($scope, $routeParams, $location, store) {
 
   $scope.save = () => {
     $scope.assignment.dueDate = new Date($scope.dueDate)
-    console.log($scope.assignment.dueDate)
+    $scope.errors = []
 
     store.save('assignments', $scope.assignment)
       .then(() => alert('Saved!'))
@@ -44,6 +44,7 @@ function manageAssignmentController($scope, $routeParams, $location, store) {
     const question = $scope.questions.find(q => q.id = qId)
 
     question.answer = question.draftAnswer
+    $scope.answerErrors = []
 
     store.save('questions', question)
       .catch(err => {
